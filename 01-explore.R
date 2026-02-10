@@ -3,9 +3,10 @@
 
 library(tidyverse)
 library(lubridate)
+library(fs)
 
 # read data
-ufo_data <- read_csv("nuforc_all_reports_table.csv")
+ufo_data <- read_csv(path(data,"nuforc_all_reports_table.csv"))
 glimpse(ufo_data)
 
 # summary statistics
