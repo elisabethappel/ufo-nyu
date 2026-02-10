@@ -1,0 +1,13 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# R files
+.Rhistory
+.RData
+.Rproj.user
+.Ruserdata
+
+# RStudio files
+.Rproj.user/
