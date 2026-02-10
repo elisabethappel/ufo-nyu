@@ -6,7 +6,7 @@ library(lubridate)
 library(fs)
 
 # read data
-ufo_data <- read_csv(path(data,"nuforc_all_reports_table.csv"))
+ufo_data <- read_csv(path("data", "nuforc_all_reports_table.csv"))
 glimpse(ufo_data)
 
 # summary statistics
@@ -80,7 +80,7 @@ p1 <- ufo_data %>%
        y = "Number of Sightings") +
   theme_minimal()
 
-ggsave("sightings_over_time.png", p1, width = 10, height = 6)
+ggsave(path("output", "sightings_over_time.png"), p1, width = 10, height = 6)
 
 # top shapes
 p2 <- ufo_data %>%
@@ -95,7 +95,7 @@ p2 <- ufo_data %>%
        y = "Number of Sightings") +
   theme_minimal()
 
-ggsave("top_shapes.png", p2, width = 8, height = 6)
+ggsave(path("output", "top_shapes.png"), p2, width = 8, height = 6)
 
 # sightings by hour
 p3 <- ufo_data %>%
@@ -109,7 +109,7 @@ p3 <- ufo_data %>%
        y = "Number of Sightings") +
   theme_minimal()
 
-ggsave("sightings_by_hour.png", p3, width = 10, height = 6)
+ggsave(path("output", "sightings_by_hour.png"), p3, width = 10, height = 6)
 
 # top states map data
 p4 <- ufo_data %>%
@@ -126,4 +126,4 @@ p4 <- ufo_data %>%
   theme_minimal() +
   theme(legend.position = "none")
 
-ggsave("top_states.png", p4, width = 8, height = 8)
+ggsave(path("output", "top_states.png"), p4, width = 8, height = 8)
