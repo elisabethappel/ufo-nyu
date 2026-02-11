@@ -164,15 +164,6 @@ ggplot(comparison_data, aes(x = season, y = sightings, fill = method)) +
 
 ggsave(path("output", "seasonal_comparison.png"), width = 10, height = 6, dpi = 300)
 
-# print statistics
-print(raw_seasonal_avg)
-print(season_predictions %>% select(season, trend_adjusted))
-
-cat("\nRaw average range:", 
-    round(max(raw_seasonal_avg$raw_average) - min(raw_seasonal_avg$raw_average)), "\n")
-cat("Trend-adjusted range:", 
-    round(max(season_predictions$trend_adjusted) - min(season_predictions$trend_adjusted)), "\n")
-
 
 # model comparison --------------------------------------------------------
 
@@ -180,20 +171,9 @@ cat("Trend-adjusted range:",
 season_only <- lm(sightings ~ season, data = seasonal_aggregated)
 year_only <- lm(sightings ~ year, data = seasonal_aggregated)
 
-cat("Season only R²:", round(summary(season_only)$r.squared, 3), "\n")
-cat("Year only R²:", round(summary(year_only)$r.squared, 3), "\n")
-cat("Season + Year R²:", round(summary(season_year_model)$r.squared, 3), "\n")
-
-# test if summer is significantly different
-cat("Is Summer significantly different from Winter?\n")
-coef_summary <- summary(season_year_model)$coefficients
-if ("seasonSummer" %in% rownames(coef_summary)) {
-  summer_coef <- coef_summary["seasonSummer", ]
-  cat("Summer coefficient:", round(summer_coef["Estimate"], 1), "\n")
-  cat("p-value:", format.pval(summer_coef["Pr(>|t|)"], digits = 3), "\n")
-  cat("Significant:", ifelse(summer_coef["Pr(>|t|)"] < 0.05, "YES", "NO"), "\n")
-}
-
+summary(season_only)
+summary(year_only)
+summary(season_year_model)
 
 # robustness --------------------------------------------------------------
 

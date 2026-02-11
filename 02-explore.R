@@ -123,10 +123,9 @@ ggsave(path("output", "top_states_per_capita.png"), p6, width = 8, height = 8)
 # map
 state_counts <- ufo_data %>%
   filter(!is.na(state)) %>%
-  count(state, sort = TRUE) 
+  count(state, sort = TRUE) %>%
+  mutate(state = toupper(state))
 
-state_counts <- state_counts %>%
-  mutate(state = toupper(state))  # usmap expects uppercase state abbreviations
 p5 <- plot_usmap(data = state_counts, values = "n", color = "white") +
   scale_fill_stepsn(colors = c("lightblue", "steelblue", "darkblue"), 
                     n.breaks = 6, 
