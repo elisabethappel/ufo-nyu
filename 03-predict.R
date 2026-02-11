@@ -206,7 +206,14 @@ years_to_show$predicted <- predict(season_year_model, newdata = years_to_show)
 ggplot(years_to_show, aes(x = season, y = predicted, fill = as.factor(year))) +
   geom_col(position = "dodge") +
   labs(
-    title = "Seasonal Pattern Holds Across Years",
-    subtitle = "Shape is consistent, only baseline shifts",
     fill = "Year"
-  )
+  ) +
+  scale_fill_manual(values = c("2014" = "lightblue", "2018" = "steelblue", "2023" = "darkblue")) +
+  labs(
+    x = "Season",
+    y = "Predicted sightings" 
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  theme_minimal()
+
+ggsave(path("output", "seasonal_by_year_robustness.png"), width = 10, height = 6, dpi = 300)
