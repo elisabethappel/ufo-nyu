@@ -38,7 +38,6 @@ def scrape_current_page(driver):
 def click_next_page(driver):
     """click the next page button. returns true if successful, false if no more pages."""
     try:
-        # find the "next" button - adjust selector based on actual html
         next_button = driver.find_element(By.CSS_SELECTOR, ".paginate_button.next:not(.disabled)")
         next_button.click()
         time.sleep(2)  # wait for new page to load

@@ -117,7 +117,6 @@ raw_seasonal_avg <- seasonal_aggregated %>%
   summarise(raw_average = mean(sightings), .groups = "drop")
 
 # trend-adjusted model
-cat("\n=== Seasonal Pattern Model (with Year Trend) ===\n")
 season_year_model <- lm(sightings ~ season + year, data = seasonal_aggregated)
 summary(season_year_model)
 
