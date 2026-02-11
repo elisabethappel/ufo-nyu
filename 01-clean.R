@@ -84,7 +84,16 @@ print(state_pop_clean)
 
 # clean and merge ---------------------------------------------------------
 
+valid_states <- state_lookup$state_abbr
+invalid_states <- ufo_raw %>%
+  filter(!is.na(state), !state %in% valid_states) %>%
+  count(state, sort = TRUE)
+
+print(invalid_states) # not in the US
+
 ufo_data <- ufo_raw %>%
+  # filter to only valid states
+  filter(is.na(state) | state %in% valid_states) %>%
   mutate(
     # parse dates
     occurred_date = mdy_hm(occurred),
