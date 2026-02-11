@@ -103,7 +103,7 @@ ufo_data <- ufo_raw %>%
   tidylog::left_join(state_pop_clean, by = c("state" = "state_abbr")) %>%
   # apply sample restriction
   filter(
-    occurred_date >= ymd_hm("2014-10-17 00:00"),
-    occurred_date < ymd_hm("2024-10-16 00:00")
+    occurred_date >= ymd_hm("2014-10-27 00:00"),
+    occurred_date < ymd_hm("2024-10-26 00:00")
   )
 
