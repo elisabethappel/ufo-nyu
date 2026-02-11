@@ -193,3 +193,20 @@ if ("seasonSummer" %in% rownames(coef_summary)) {
   cat("p-value:", format.pval(summer_coef["Pr(>|t|)"], digits = 3), "\n")
   cat("Significant:", ifelse(summer_coef["Pr(>|t|)"] < 0.05, "YES", "NO"), "\n")
 }
+
+
+# robustness --------------------------------------------------------------
+
+years_to_show <- data.frame(
+  season = rep(c("Winter", "Spring", "Summer", "Fall"), 3),
+  year = rep(c(2014, 2018, 2023), each = 4)
+)
+years_to_show$predicted <- predict(season_year_model, newdata = years_to_show)
+
+ggplot(years_to_show, aes(x = season, y = predicted, fill = as.factor(year))) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Seasonal Pattern Holds Across Years",
+    subtitle = "Shape is consistent, only baseline shifts",
+    fill = "Year"
+  )
